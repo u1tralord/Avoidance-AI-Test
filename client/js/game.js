@@ -54,7 +54,7 @@ var player = {
     xVelocity: 0.0,
     yVelocity: 0.0,
     maxXSpeed: 5,
-    maxYSpeed: 10,
+    maxYSpeed: 15,
     draw: function() {
 		this.trail.forEach(function(particle) {
             particle.draw();
@@ -230,10 +230,13 @@ function Follower(I) {
             });
             if (tempSafe) {
                 if (I.y < CANVAS_HEIGHT) {
+                    var distanceToPlayer = Math.sqrt(Math.pow(player.x - I.x, 2) + Math.pow(player.y + I.y , 2));
+                    var acceleration = distanceToPlayer/3;
+                    
                     if (I.x < player.x)
-                        I.xVelocity += 0.01; // = 0.75
+                        I.xVelocity += 0.04; // = 0.75
                     else if (I.x > player.x)
-                        I.xVelocity += -0.01; // = 0.75
+                        I.xVelocity += -0.04; // = 0.75
                     else
                         I.xVelocity = 0;
                 }
@@ -471,7 +474,9 @@ function update() {
         player.xVelocity -= 1;
     }
     if (keydown.up || keydown.w) {
-        speed += 0.3;
+        if(speed < player.maxYSpeed)
+            speed += 0.3;
+        
         followers.forEach(function(follower) {
             follower.y += 2;
         });
@@ -579,7 +584,7 @@ function collides(a, b) {
 function handleCollisions() {
     obstacles.forEach(function(obstacle) {
         if (collides(player, obstacle)) {
-            //gameOver();
+            gameOver();
         }
         followers.forEach(function(follower) {
             if (collides(follower, obstacle)) {
