@@ -22,8 +22,8 @@ var instructionElement = $("<p id='instructions'>"+instructions+"</p>");
 instructionElement.appendTo(document.getElementById("game"));
 drawStartScreen();
 
-obstacles =	 [];
-followers = [];
+var obstacles =	 [];
+var followers = [];
 
 setInterval(function() {
     if (running) {
@@ -64,7 +64,7 @@ var player = {
         canvas.fillRect(this.x, this.y, this.width, this.height);
 		
 		canvas.globalAlpha = shadowAlpha;
-		for(i=0; i < 5; i++){
+		for(var i=0; i < 5; i++){
 			canvas.fillRect(this.x+i, this.y+i, this.width, this.height);
 		}
 		canvas.globalAlpha = 1;
@@ -165,7 +165,7 @@ function Follower(I) {
         canvas.fillRect(I.x, I.y, I.width, I.height);
 		
 		canvas.globalAlpha = shadowAlpha;
-		for(i=0; i < 5; i++){
+		for(var i=0; i < 5; i++){
 			canvas.fillRect(this.x+i, this.y+i, this.width, this.height);
 		}
 		canvas.globalAlpha = 1;
@@ -190,8 +190,8 @@ function Follower(I) {
         },
 
     I.avoid = function(obstacle) {
-            distance = obstacle.midpoint().x - I.midpoint().x;
-            time = 0.1 * Math.abs(obstacle.midpoint().y - I.midpoint().y);
+            var distance = obstacle.midpoint().x - I.midpoint().x;
+            var time = 0.5 * Math.abs(obstacle.midpoint().y - I.midpoint().y);
             I.xVelocity -= 0.5 * (distance / time);
 
             if (I.x > CANVAS_WIDTH - I.width - 20)
@@ -231,9 +231,9 @@ function Follower(I) {
             if (tempSafe) {
                 if (I.y < CANVAS_HEIGHT) {
                     if (I.x < player.x)
-                        I.xVelocity = 0.75;
+                        I.xVelocity += 0.01; // = 0.75
                     else if (I.x > player.x)
-                        I.xVelocity = -0.75;
+                        I.xVelocity += -0.01; // = 0.75
                     else
                         I.xVelocity = 0;
                 }
@@ -351,7 +351,7 @@ function Obstacle(I) {
 		}*/
 				
 		canvas.globalAlpha = shadowAlpha;
-		for(i=0; i < 5; i++){
+		for(var i=0; i < 5; i++){
 			canvas.fillRect(this.x+i, this.y+i, this.width, this.height);
 		}
 		canvas.globalAlpha = 1;
@@ -579,7 +579,7 @@ function collides(a, b) {
 function handleCollisions() {
     obstacles.forEach(function(obstacle) {
         if (collides(player, obstacle)) {
-            gameOver();
+            //gameOver();
         }
         followers.forEach(function(follower) {
             if (collides(follower, obstacle)) {

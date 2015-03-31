@@ -1,0 +1,10 @@
+{
+    "updateRate":60,
+    "pingRate":35,
+    "fps":60,
+    "canvas":{
+        "height":480,
+        "width":640
+    },
+    "dir":"/home/ubuntu/workspace/"
+}
