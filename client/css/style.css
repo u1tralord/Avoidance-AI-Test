@@ -1,11 +1,19 @@
-.content {
+#content {
 	width:100%;
 	display:table;
-	margin:0;
+	margin: auto;
 	max-width:none;
 	background-color:#272B34;/*FE4B74*/
 	height:50vh;
 	border-bottom: 1px solid #1C2029;
+}
+
+.contentContainer{
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: #232c31;
+    margin: auto;
 }
 
 nav li {

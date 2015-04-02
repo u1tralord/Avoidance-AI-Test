@@ -19,7 +19,7 @@ canvasElement.appendTo(document.getElementById("game"));
 
 var instructions = "Instructions:<br> > Use left/right arrow or A/D keys to control your character <br> > Press up arrow or W to speed up";
 var instructionElement = $("<p id='instructions'>"+instructions+"</p>");
-instructionElement.appendTo(document.getElementById("game"));
+//instructionElement.appendTo(document.getElementById("game"));
 drawStartScreen();
 
 var obstacles =	 [];
